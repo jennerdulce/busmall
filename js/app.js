@@ -1,5 +1,6 @@
 "use strict";
 
+var name = prompt("Please Enter Your Name.. ")
 var totalClicks = 0;
 var items = [];
 var imgOne = document.getElementById('imgOne');
@@ -7,6 +8,7 @@ var imgTwo = document.getElementById('imgTwo');
 var imgThree = document.getElementById('imgThree');
 var ul = document.getElementById('resultslist');
 var results = document.getElementById('results');
+var thankYou = document.getElementById('thankyou')
 
 function Items(name) {
   this.name = name;
@@ -85,7 +87,7 @@ function handleClick(e){
 
   if (totalClicks === 25){
     parentElement.removeEventListener('click', handleClick);
-
+    thankYou.textContent = `Thank you ${name}! We appreciate your help and we hope you have a wonderful day!`
     for (var i = 0; i < items.length; i++){
       var li = document.createElement('li');
       li.textContent = `${capitalize(items[i].name)} had ${items[i].votes} votes, and was seen ${items[i].views} times.`;
