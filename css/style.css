@@ -18,13 +18,13 @@ main > h1 {
 
 #container {
   /* width: 90%; */
-  padding: 10em 1em 3em 1em;
+  padding: 3em 1em 3em 1em;
   border: 4px black solid;
   /* margin: auto; */
   display: flex;
   margin-top: 3em;
   border-radius: 30px;
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, .25);
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, .25);
   background-color: white;
 }
 
@@ -44,6 +44,7 @@ main > h1 {
   margin: auto;
   border-radius: 50px;
   background: black;
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, .25);
 } 
 
 #imgOne:hover, #imgTwo:hover, #imgThree:hover {
@@ -64,7 +65,8 @@ main > h1 {
 
 #results:hover {
   cursor: pointer;
-  background-color: #eee;
+  background-color: rgb(177, 177, 177);
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, .25);
 }
 
 #resultslist {
@@ -85,14 +87,14 @@ main > h1 {
 
 
 ul li:nth-child(4n+1) {
- color: green
+ color: rgb(124, 198, 124)
 }
 ul li:nth-child(2n+2) {
-  color: blue
+  color: rgb(128, 164, 255)
 }
 ul li:nth-child(4n+3) {
-  color: orange
+  color: rgb(255, 204, 110)
 }
 ul li:nth-child(4n+4) {
-  color: red
+  color: rgb(255, 88, 88)
 }

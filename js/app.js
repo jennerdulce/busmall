@@ -88,6 +88,7 @@ function handleClick(e){
   if (totalClicks === 25){
     parentElement.removeEventListener('click', handleClick);
     thankYou.textContent = `Thank you ${name}! We appreciate your help and we hope you have a wonderful day!`
+    
     for (var i = 0; i < items.length; i++){
       var li = document.createElement('li');
       li.textContent = `${capitalize(items[i].name)} had ${items[i].votes} votes, and was seen ${items[i].views} times.`;
