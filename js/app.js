@@ -48,17 +48,32 @@ function randomItem() {
   return Math.floor(Math.random() * items.length);
 }
 
-function renderItems() {
+var renderQueue = [];
+function populateQueue() {
+  renderQueue = [];
+  while(renderQueue.length < 3){
+    var item = randomItem();
+    while(renderQueue.includes(item)){
+      item = randomItem();
+    }
+    renderQueue.push(item);
+  }
+}
 
+function renderItems() {
+  populateQueue();
   // generates a random number
-  var itemOne = randomItem();
-  var itemTwo = randomItem();
-  var itemThree = randomItem();
+  // var itemOne = randomItem();
+  // var itemTwo = randomItem();
+  // var itemThree = randomItem();
+  var itemOne = renderQueue[0];
+  var itemTwo = renderQueue[1];
+  var itemThree = renderQueue[2];
 
   // numbers are compared so there are no duplicates
-  itemOne = checkDuplicates(itemOne, itemTwo, itemThree);
-  itemTwo = checkDuplicates(itemTwo, itemOne, itemThree);
-  itemThree = checkDuplicates(itemThree, itemTwo, itemOne);
+  // itemOne = checkDuplicates(itemOne, itemTwo, itemThree);
+  // itemTwo = checkDuplicates(itemTwo, itemOne, itemThree);
+  // itemThree = checkDuplicates(itemThree, itemTwo, itemOne);
 
   // numbers are then used as index # on the 'items' array
   // since the items are chosen, the view count for each item is increased
@@ -77,12 +92,12 @@ function renderItems() {
 
 renderItems();
 
-function checkDuplicates(x, y, z){
-  while (x === y || x === z){
-    x = randomItem();
-  }
-  return x;
-}
+// function checkDuplicates(x, y, z){
+//   while (x === y || x === z){
+//     x = randomItem();
+//   }
+//   return x;
+// }
 
 function capitalize(word){
   var wordCapitalized = word.charAt(0).toUpperCase() + word.slice(1);
