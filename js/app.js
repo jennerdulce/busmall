@@ -3,7 +3,6 @@
 var user = prompt('Please Enter Your Name.. ');
 var totalClicks = 0;
 var items = [];
-var renderQueue = [];
 var imgOne = document.getElementById('imgOne');
 var imgTwo = document.getElementById('imgTwo');
 var imgThree = document.getElementById('imgThree');
