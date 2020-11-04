@@ -3,6 +3,7 @@
 var user = prompt('Please Enter Your Name.. ');
 var totalClicks = 0;
 var items = [];
+var renderQueue = [];
 var imgOne = document.getElementById('imgOne');
 var imgTwo = document.getElementById('imgTwo');
 var imgThree = document.getElementById('imgThree');
@@ -54,6 +55,7 @@ function populateQueue() {
   while(renderQueue.length < 3){
     var item = randomItem();
     while(renderQueue.includes(item)){
+
       item = randomItem();
     }
     renderQueue.push(item);
@@ -92,12 +94,6 @@ function renderItems() {
 
 renderItems();
 
-// function checkDuplicates(x, y, z){
-//   while (x === y || x === z){
-//     x = randomItem();
-//   }
-//   return x;
-// }
 
 function capitalize(word){
   var wordCapitalized = word.charAt(0).toUpperCase() + word.slice(1);
@@ -105,16 +101,19 @@ function capitalize(word){
 }
 
 // function of the event listener
-function handleClick(e){
+
+function handleClick(e) {
+
   // targets the element which is an image tag; .alt retrieves what is in the alt attribute of the element
   // typically, 'e.target.name.value' would be used in a form to retrieve the data
   var clickedItem = e.target.alt;
   totalClicks++;
 
   // the chosen item is then compared to the items array
-  for(var i = 0; i < items.length; i++){
+
+  for (var i = 0; i < items.length; i++) {
     // once matched, increments the votes property of that object
-    if (clickedItem === items[i].name){
+    if (clickedItem === items[i].name) {
       items[i].votes++;
     }
   }
@@ -123,12 +122,16 @@ function handleClick(e){
   renderItems();
 
   // will only trigger when totalClicks = 25
-  if (totalClicks === 25){
+
+  if (totalClicks === 25) {
+
     parentElement.removeEventListener('click', handleClick);
     thankYou.textContent = `Thank you ${user}! We appreciate your help and we hope you have a wonderful day!`;
 
     // appends content to the list to display the data
-    for(var i = 0; i < items.length; i++){
+
+    for (var i = 0; i < items.length; i++) {
+
       var li = document.createElement('li');
       li.textContent = `${capitalize(items[i].name)} had ${items[i].votes} votes, and was seen ${items[i].views} times.`;
       ul.appendChild(li);
@@ -144,7 +147,7 @@ parentElement.addEventListener('click', handleClick);
 var trigger = false;
 ul.style.marginLeft = '-999px';
 
-function handleResults(){
+function handleResults() {
   if (trigger === false) {
     ul.style.marginLeft = '0';
     ul.style.textAlign = 'center';
@@ -156,3 +159,61 @@ function handleResults(){
   }
 }
 results.addEventListener('click', handleResults);
+
+
+
+// Chart JS
+// var chartElement = document.getElementById('chart').getContext('2d');
+// var barChart = new Chart(chartElement, {
+//   type: 'bar',
+//   date: {
+//     labels: [
+//       'bag',
+//       'banana',
+//       'bathroom',
+//       'boots',
+//       'breakfast',
+//       'bubblegum',
+//       'chair',
+//       'cthulhu',
+//       'dog-duck',
+//       'dragon',
+//       'pen',
+//       'pet-sweep',
+//       'scissors',
+//       'shark',
+//       'sweep',
+//       'tauntaun',
+//       'unicorn',
+//       'usb',
+//       'water-can',
+//       'wine-glass',
+//     ],
+//     datasets: [{
+//       label: 'Votes',
+//       data: [
+//         items[0].votes,
+//         items[1].votes,
+//         items[2].votes,
+//         items[3].votes,
+//         items[4].votes,
+//         items[5].votes,
+//         items[6].votes,
+//         items[7].votes,
+//         items[8].votes,
+//         items[9].votes,
+//         items[10].votes,
+//         items[11].votes,
+//         items[12].votes,
+//         items[13].votes,
+//         items[14].votes,
+//         items[15].votes,
+//         items[16].votes,
+//         items[17].votes,
+//         items[18].votes,
+//         items[19].votes,
+//       ]
+//     }]
+//   },
+//   options: {},
+// })
