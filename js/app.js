@@ -49,11 +49,13 @@ function randomItem() {
   return Math.floor(Math.random() * items.length);
 }
 
+var renderQueue = [];
 function populateQueue() {
   renderQueue = [];
-  while (renderQueue.length < 3) {
+  while(renderQueue.length < 3){
     var item = randomItem();
-    while (renderQueue.includes(item)) {
+    while(renderQueue.includes(item)){
+
       item = randomItem();
     }
     renderQueue.push(item);
@@ -92,19 +94,23 @@ function renderItems() {
 
 renderItems();
 
-function capitalize(word) {
+
+function capitalize(word){
   var wordCapitalized = word.charAt(0).toUpperCase() + word.slice(1);
   return wordCapitalized;
 }
 
 // function of the event listener
+
 function handleClick(e) {
+
   // targets the element which is an image tag; .alt retrieves what is in the alt attribute of the element
   // typically, 'e.target.name.value' would be used in a form to retrieve the data
   var clickedItem = e.target.alt;
   totalClicks++;
 
   // the chosen item is then compared to the items array
+
   for (var i = 0; i < items.length; i++) {
     // once matched, increments the votes property of that object
     if (clickedItem === items[i].name) {
@@ -116,12 +122,16 @@ function handleClick(e) {
   renderItems();
 
   // will only trigger when totalClicks = 25
+
   if (totalClicks === 25) {
+
     parentElement.removeEventListener('click', handleClick);
     thankYou.textContent = `Thank you ${user}! We appreciate your help and we hope you have a wonderful day!`;
 
     // appends content to the list to display the data
+
     for (var i = 0; i < items.length; i++) {
+
       var li = document.createElement('li');
       li.textContent = `${capitalize(items[i].name)} had ${items[i].votes} votes, and was seen ${items[i].views} times.`;
       ul.appendChild(li);
