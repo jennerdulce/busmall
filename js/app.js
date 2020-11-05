@@ -203,32 +203,3 @@ function renderChart() {
     }
   });
 }
-
-
-var cars = {
-  name: 'honda',
-  year: '2012',
-  color: 'blue'
-}
-
-cars.color
-
-
-car Construactors(make, year, color){
-  this.make = make;
-  this.year = year;
-  this.color = color;
-  this.views =views
-}
-
-var cars = new Constructor(honda, 2012, blue)
-color.views
-
-
-
-
-var products = [obj1, obj2]
-new Constructor('Honda', '2009', 'blue');
-new Constructor('Ford', '2012', 'red');
-
-prodcuts[0].color;
