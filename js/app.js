@@ -9,6 +9,7 @@ var items = [];
 var dataLabels = [];
 var dataVotes = [];
 var dataViews = [];
+var renderQueue = [];
 var imgOne = document.getElementById('imgOne');
 var imgTwo = document.getElementById('imgTwo');
 var imgThree = document.getElementById('imgThree');
@@ -60,8 +61,6 @@ function capitalize(word) {
   return wordCapitalized;
 }
 
-var renderQueue = [];
-
 function populateQueue() {
   while (renderQueue.length > 3) {
     renderQueue.shift();
@@ -95,6 +94,14 @@ function renderItems() {
   imgThree.src = items[itemThree].src;
   imgThree.alt = items[itemThree].name;
   items[itemThree].views++;
+}
+
+function getData() {
+  for (var i = 0; i < items.length; i++) {
+    dataVotes.push(items[i].votes);
+    dataViews.push(items[i].views);
+    dataLabels.push(capitalize(items[i].name));
+  }
 }
 
 // initial render
@@ -151,6 +158,7 @@ function handleResults() {
   if (trigger === false) {
     ul.style.marginLeft = '0';
     ul.style.textAlign = 'center';
+    ul.style.marginBottom = '30px'
     trigger = true;
   } else if (trigger === true) {
     ul.style.marginLeft = '-999px';
@@ -160,36 +168,33 @@ function handleResults() {
 }
 results.addEventListener('click', handleResults);
 
+// chart JS
 
-function getData() {
-  for (var i = 0; i < items.length; i++) {
-    dataVotes.push(items[i].votes);
-    dataViews.push(items[i].views);
-    dataLabels.push(items[i].name)
-  }
-  console.log(dataLabels)
-  console.log(dataViews)
-  console.log(dataVotes)
-}
-
-var myChart = document.getElementById('graph')
+Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontSize = 18;
+Chart.defaults.global.defaultFontColor = '#777'
+var myChart = document.getElementById('graph');
 function renderChart() {
   var barChart = new Chart(myChart, {
     type: 'bar',
     data: {
       labels: dataLabels,
       datasets: [{
-        label: '# of Views',
-        data: dataViews,
-        backgroundColor: 'rgba(128, 179, 255, 0.886)',
-        borderColor: 'rgba(71, 144, 255, 0.886)',
-        borderWidth: 2,
-      }, {
         label: '# of Votes',
         data: dataVotes,
         backgroundColor: 'rgba(255, 128, 128, 0.886)',
         borderColor: 'rgba(255, 81, 81, 0.886)',
         borderWidth: 2,
+        hoverBorderWidth: 4,
+        hoverBorderColor: 'black',
+      }, {
+        label: '# of Views',
+        data: dataViews,
+        backgroundColor: 'rgba(128, 179, 255, 0.886)',
+        borderColor: 'rgba(71, 144, 255, 0.886)',
+        borderWidth: 2,
+        hoverBorderWidth: 4,
+        hoverBorderColor: 'black',
       }],
       options: {
         scales: {
