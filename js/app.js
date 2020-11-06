@@ -158,7 +158,6 @@ function handleResults() {
   if (trigger === false) {
     ul.style.marginLeft = '0';
     ul.style.textAlign = 'center';
-    ul.style.marginBottom = '30px'
     trigger = true;
   } else if (trigger === true) {
     ul.style.marginLeft = '-999px';
@@ -170,7 +169,7 @@ results.addEventListener('click', handleResults);
 
 // chart JS
 
-Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontFamily = 'sans-serif';
 Chart.defaults.global.defaultFontSize = 18;
 Chart.defaults.global.defaultFontColor = '#777'
 var myChart = document.getElementById('graph');
@@ -197,6 +196,10 @@ function renderChart() {
         hoverBorderColor: 'black',
       }],
       options: {
+        legend: {
+          boxWidth: 80,
+          padding: 30
+        },
         scales: {
           yAxes: [{
             ticks: {
