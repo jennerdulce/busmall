@@ -2,7 +2,7 @@
 
 var user = prompt('Please Enter Your Name.. ');
 while (!user) {
-  user = prompt("Please enter your name")
+  user = prompt("Please enter your name");
 }
 var totalClicks = 0;
 var items = [];
@@ -18,39 +18,54 @@ var results = document.getElementById('results');
 var thankYou = document.getElementById('thankyou');
 
 
-function Items(name) {
+
+function Item(name) {
 
   // we use this to change the 'alt' attribute of the image
   this.name = name;
 
   // we use this to actually change the 'src' attribute of the image we retrieve VIA DOM so it displays on the html page
   this.src = `img/${name}.jpg`;
-
   this.views = 0;
   this.votes = 0;
   items.push(this);
 }
 
-new Items('bag');
-new Items('banana');
-new Items('bathroom');
-new Items('boots');
-new Items('breakfast');
-new Items('bubblegum');
-new Items('chair');
-new Items('cthulhu');
-new Items('dog-duck');
-new Items('dragon');
-new Items('pen');
-new Items('pet-sweep');
-new Items('scissors');
-new Items('shark');
-new Items('sweep');
-new Items('tauntaun');
-new Items('unicorn');
-new Items('usb');
-new Items('water-can');
-new Items('wine-glass');
+// you can put all strings in an array and then for loop through ti
+// for (var i =0; i < Array.length; i++){
+//   new Item(array[i]);
+// }
+
+// Retrieves data if data has been stored locally
+var retrievedData = localStorage.getItem('storedResults');
+
+if (retrievedData) {
+  var parsedRetrievedData = JSON.parse(retrievedData);
+  items = parsedRetrievedData;
+
+} else {
+  new Item('bag');
+  new Item('banana');
+  new Item('bathroom');
+  new Item('boots');
+  new Item('breakfast');
+  new Item('bubblegum');
+  new Item('chair');
+  new Item('cthulhu');
+  new Item('dog-duck');
+  new Item('dragon');
+  new Item('pen');
+  new Item('pet-sweep');
+  new Item('scissors');
+  new Item('shark');
+  new Item('sweep');
+  new Item('tauntaun');
+  new Item('unicorn');
+  new Item('usb');
+  new Item('water-can');
+  new Item('wine-glass');
+}
+
 
 function randomItem() {
   return Math.floor(Math.random() * items.length);
@@ -106,7 +121,6 @@ function getData() {
 
 // initial render
 renderItems();
-
 // function of the event listener
 function handleClick(e) {
 
@@ -133,6 +147,10 @@ function handleClick(e) {
       getData();
       renderChart();
 
+      // storing using localStorage.setItem() and var = JSON.stringify(listOfObjects)
+      var stringifiedResults = JSON.stringify(items);
+      localStorage.setItem('storedResults', stringifiedResults);
+
       // appends content to the list to display the data
       for (var i = 0; i < items.length; i++) {
         var li = document.createElement('li');
@@ -142,7 +160,7 @@ function handleClick(e) {
       // will only trigger when totalClicks = 2
     }
   } else {
-    alert('Please click on an image.')
+    alert('Please click on an image.');
   }
 }
 
@@ -152,7 +170,7 @@ parentElement.addEventListener('click', handleClick);
 
 // ability to hide/show data
 var trigger = false;
-ul.style.marginLeft = '-999px';
+ul.style.display = 'none';
 
 function handleResults() {
   if (trigger === false) {
@@ -161,7 +179,7 @@ function handleResults() {
     trigger = true;
   } else if (trigger === true) {
     ul.style.marginLeft = '-999px';
-    ul.style.textAlign = 'left';
+    ul.style.display = 'none';
     trigger = false;
   }
 }
