@@ -16,7 +16,7 @@ var imgThree = document.getElementById('imgThree');
 var ul = document.getElementById('resultslist');
 var results = document.getElementById('results');
 var thankYou = document.getElementById('thankyou');
-
+var itemList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum','chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep','scissors','shark','sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 
 function Item(name) {
@@ -38,34 +38,18 @@ function Item(name) {
 
 // Retrieves data if data has been stored locally
 var retrievedData = localStorage.getItem('storedResults');
-
 if (retrievedData) {
   var parsedRetrievedData = JSON.parse(retrievedData);
   items = parsedRetrievedData;
-
 } else {
-  new Item('bag');
-  new Item('banana');
-  new Item('bathroom');
-  new Item('boots');
-  new Item('breakfast');
-  new Item('bubblegum');
-  new Item('chair');
-  new Item('cthulhu');
-  new Item('dog-duck');
-  new Item('dragon');
-  new Item('pen');
-  new Item('pet-sweep');
-  new Item('scissors');
-  new Item('shark');
-  new Item('sweep');
-  new Item('tauntaun');
-  new Item('unicorn');
-  new Item('usb');
-  new Item('water-can');
-  new Item('wine-glass');
+  generateItems(itemList);
 }
 
+function generateItems(array){
+  for (var i = 0; i < array.length; i++) {
+    new Item(array[i]);
+  }
+}
 
 function randomItem() {
   return Math.floor(Math.random() * items.length);
@@ -147,6 +131,7 @@ function handleClick(e) {
       getData();
       renderChart();
 
+      // once we get all the data
       // storing using localStorage.setItem() and var = JSON.stringify(listOfObjects)
       var stringifiedResults = JSON.stringify(items);
       localStorage.setItem('storedResults', stringifiedResults);
