@@ -161,9 +161,10 @@ function handleResults() {
   if (trigger === false) {
     ul.style.marginLeft = '0';
     ul.style.textAlign = 'center';
+    ul.style.display = 'initial';
     trigger = true;
   } else if (trigger === true) {
-    ul.style.marginLeft = '-999px';
+    // ul.style.marginLeft = '-999px';
     ul.style.display = 'none';
     trigger = false;
   }
